@@ -8,6 +8,7 @@ public interface AbonnementInterface {
 
     List<Abonnement> getAllAbonnement();
     Abonnement getAbonnement(Long id);
-    Abonnement saveAbonnement(Abonnement data,Long id);
+    Abonnement create(Abonnement data);
+    Abonnement update(Abonnement data,Long id);
     void deleteAbonnement(Long id);
 }

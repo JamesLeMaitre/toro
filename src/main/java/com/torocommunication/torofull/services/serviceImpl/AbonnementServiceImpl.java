@@ -25,8 +25,14 @@ public class AbonnementServiceImpl implements AbonnementInterface {
     }
 
     @Override
-    public Abonnement saveAbonnement(Abonnement data, Long id) {
+    public Abonnement create(Abonnement data) {
+        return abonnementRepository.save(data);
+    }
+
+    @Override
+    public Abonnement update(Abonnement data, Long id) {
         Abonnement abonnement = abonnementRepository.findById(id).orElse(null);
+        assert abonnement != null : "ID null";
         abonnement.setEtat(data.getEtat());
         abonnement.setId(data.getId());
         abonnement.setLibelle(data.getLibelle());
