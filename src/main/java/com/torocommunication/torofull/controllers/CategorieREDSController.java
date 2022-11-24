@@ -1,9 +1,9 @@
 package com.torocommunication.torofull.controllers;
 
 import com.torocommunication.torofull.entities.Abonnement;
-import com.torocommunication.torofull.services.serviceInterface.AbonnementInterface;
+import com.torocommunication.torofull.entities.CategorieREDS;
+import com.torocommunication.torofull.services.serviceInterface.CategorieREDSInterface;
 import com.torocommunication.torofull.utiles.DataFormatter;
-import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.PrintWriter;
@@ -11,15 +11,18 @@ import java.io.StringWriter;
 import java.util.List;
 
 @RestController
-@AllArgsConstructor
-@RequestMapping("api/abonnement/")
-public class AbonnementController extends DataFormatter<Abonnement> {
-    private final AbonnementInterface anInterface;
+@RequestMapping("api/categoriereds/")
+public class CategorieREDSController extends DataFormatter<CategorieREDS> {
+    private final CategorieREDSInterface redsInterface;
+
+    public CategorieREDSController(CategorieREDSInterface redsInterface) {
+        this.redsInterface = redsInterface;
+    }
 
     @PostMapping("add")
-    public Object create(@RequestBody() Abonnement data){
+    public Object create(@RequestBody() CategorieREDS data){
         try {
-            return  renderData(true, anInterface.create(data),"Create ");
+            return  renderData(true, redsInterface.save(data),"Create ");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
@@ -29,12 +32,12 @@ public class AbonnementController extends DataFormatter<Abonnement> {
     }
 
     @PutMapping(value = "edit/{id}")
-    public Object update(@PathVariable Long id, @RequestBody Abonnement data) {
+    public Object update(@PathVariable Long id, @RequestBody CategorieREDS data) {
         try {
-            if( anInterface.getAbonnement(id)==null){
+            if( redsInterface.getById(id)==null){
                 return  renderStringData(false,"ID null" ,"item not found");
             }
-            return  renderData(true, anInterface.update(data,id),"update done successfully");
+            return  renderData(true, redsInterface.update(data,id),"update done successfully");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
@@ -46,7 +49,7 @@ public class AbonnementController extends DataFormatter<Abonnement> {
     @GetMapping("list")
     public Object List(){
         try {
-            List<Abonnement> items = anInterface.getAllAbonnement();
+            List<CategorieREDS> items = redsInterface.getAll();
             return  renderDataArray(true,items,"list of element");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
@@ -59,7 +62,7 @@ public class AbonnementController extends DataFormatter<Abonnement> {
     @GetMapping("by/id/{id}")
     public Object getById(@PathVariable("id") Long id){
         try {
-            Abonnement item = anInterface.getAbonnement(id);
+            CategorieREDS item = redsInterface.getById(id);
             if(item == null){
                 return  renderStringData(false,"Error while processing" ,"item not found");
             }
@@ -75,11 +78,11 @@ public class AbonnementController extends DataFormatter<Abonnement> {
     @DeleteMapping("delete/{id}")
     public Object delete(@PathVariable("id") Long id){
         try {
-            Abonnement item = anInterface.getAbonnement(id);
+            CategorieREDS item = redsInterface.getById(id);
             if(item == null){
                 return  renderStringData(false,"Error while processing" ,"item not found");
             }
-            anInterface.deleteAbonnement(id);
+            redsInterface.delete(id);
             return  renderStringData(true,"Delete successfully","Done");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
@@ -88,5 +91,4 @@ public class AbonnementController extends DataFormatter<Abonnement> {
             return  renderStringData(false,"Error while processing" ,exceptionAsString);
         }
     }
-
 }
