@@ -17,14 +17,11 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class UtilisateurUEA {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-
-
     @Column(nullable = false)
     private String codeUEA;
 
@@ -71,27 +68,31 @@ public class UtilisateurUEA {
     @Column(nullable = false)
     private Date dateUpdate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_type_operateur")
     private TypeUEA typeUEA;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_type_operateur")
     private Abonnement abonnement;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_type_operateur")
     private DetailSA detailSA;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_type_operateur")
     private UtilisateurUEA utilisateurUEA;
 
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Collection<RoleUEA> roleUEAS = new ArrayList<>();
 
-
-
-
+    public UtilisateurUEA( String nom, String prenom, String username, String password, Collection<RoleUEA> roleUEAS) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.username = username;
+        this.password = password;
+        this.roleUEAS = roleUEAS;
+    }
 }
