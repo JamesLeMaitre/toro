@@ -59,6 +59,11 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     }
 
     @Override
+    public UtilisateurUEA getByID(Long id) {
+        return userRepo.findById(id).orElse(null);
+    }
+
+    @Override
     public RoleUEA saveRole(RoleUEA role) {
         System.out.println("enregistrement du role {} dans la base de données"+role.getRolename());
         return roleRepo.save(role);

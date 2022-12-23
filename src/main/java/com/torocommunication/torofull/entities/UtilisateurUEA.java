@@ -84,7 +84,6 @@ public class UtilisateurUEA {
     @JoinColumn(name = "id_type_operateur")
     private UtilisateurUEA utilisateurUEA;
 
-
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private Collection<RoleUEA> roleUEAS = new ArrayList<>();
 

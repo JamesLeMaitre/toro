@@ -26,4 +26,12 @@ public class TypeUEA {
     @Column(nullable = false, unique = true)
     private Boolean etat=false;
 
+    @CreationTimestamp
+    @Column(nullable = false)
+    private Date dateCreate;
+
+    @UpdateTimestamp
+    @Column(nullable = false)
+    private Date dateUpdate;
+
 }
