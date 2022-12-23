@@ -8,6 +8,8 @@ import java.util.List;
 public interface UtilisateurUEAInterface {
 
     UtilisateurUEA saveUser(UtilisateurUEA user);
+
+    UtilisateurUEA getByID(Long id);
     RoleUEA saveRole(RoleUEA role);
     void addRoleToUser(String username,String roleName);
     UtilisateurUEA getUser(String username);
