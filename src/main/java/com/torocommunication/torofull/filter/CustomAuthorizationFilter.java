@@ -28,7 +28,6 @@ import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
-@Slf4j
 
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
     @Override
@@ -56,7 +55,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     filterChain.doFilter(request,response);
 
                 }catch (Exception exception){
-                        log.error("erreur d'authentification : {}",exception.getMessage());
+                    System.out.println("erreur d'authentification : {}"+exception.getMessage());
                         response.setHeader("error",exception.getMessage());
                         response.setStatus(FORBIDDEN.value());
                        // response.sendError(FORBIDDEN.value());

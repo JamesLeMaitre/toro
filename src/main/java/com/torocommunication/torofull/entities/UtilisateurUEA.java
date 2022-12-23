@@ -60,6 +60,12 @@ public class UtilisateurUEA {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
+   @Column
+    private Boolean isNotLocked = true;
+
+    @Column
+    private Boolean isActive = false;
+
     @CreationTimestamp
     @Column(nullable = false)
     private Date dateCreate;
@@ -69,7 +75,7 @@ public class UtilisateurUEA {
     private Date dateUpdate;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_type_operateur")
+    @JoinColumn(name = "id_type_UEA")
     private TypeUEA typeUEA;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -77,21 +83,20 @@ public class UtilisateurUEA {
     private Abonnement abonnement;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_type_operateur")
+    @JoinColumn(name = "id_type_detailSA")
     private DetailSA detailSA;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_type_operateur")
-    private UtilisateurUEA utilisateurUEA;
 
-    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-    private Collection<RoleUEA> roleUEAS = new ArrayList<>();
 
-    public UtilisateurUEA( String nom, String prenom, String username, String password, Collection<RoleUEA> roleUEAS) {
-        this.nom = nom;
-        this.prenom = prenom;
-        this.username = username;
-        this.password = password;
-        this.roleUEAS = roleUEAS;
-    }
+
+
+
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "idUser"),
+            inverseJoinColumns = @JoinColumn(name = "roles_id", referencedColumnName = "idRole"))
+    @ManyToMany
+    @ToString.Exclude
+    private Collection<RoleUEA> roles = new ArrayList<>();
+
+
 }

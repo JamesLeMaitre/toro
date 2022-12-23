@@ -32,7 +32,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class UserRessource {
 
-    private  final UtilisateurUEAInterface userService;
+ /*   private  final UtilisateurUEAInterface userService;
 
 
 
@@ -94,7 +94,7 @@ public class UserRessource {
             throw new RuntimeException("actualisation de token echoué");
         }
     }
-
+*/
 }
 @Data
 class RoleToUserFrom{

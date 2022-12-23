@@ -1,7 +1,6 @@
 package com.torocommunication.torofull.service.serviceInterface;
 
 import com.torocommunication.torofull.entities.SecteurDactivite;
-import com.torocommunication.torofull.src.main.java.com.esmc.gestionKsu.entities.Abonnement;
 
 import java.util.List;
 

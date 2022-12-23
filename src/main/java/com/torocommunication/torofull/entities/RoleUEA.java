@@ -31,4 +31,10 @@ public class RoleUEA {
     @UpdateTimestamp
     @Column(nullable = false)
     private Date dateUpdate;
+
+
+    public RoleUEA(Long id, String rolename) {
+        this.id = id;
+        this.rolename = rolename;
+    }
 }

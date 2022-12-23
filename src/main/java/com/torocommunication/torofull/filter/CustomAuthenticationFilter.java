@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,7 +25,7 @@ import java.util.stream.Collectors;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-@Slf4j
+
 public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
 
@@ -37,13 +38,16 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        String username=request.getParameter("username");
-        String password=request.getParameter("password");
-        log.info("le nom de l'utilisateur est {} ",username);  log.info("le mot de passe est {} ",password);
-
-        UsernamePasswordAuthenticationToken authenticationToken=new UsernamePasswordAuthenticationToken(username,password);
-
-        return  authenticationManager.authenticate(authenticationToken);
+        String username = request.getParameter("username");
+        if(username == null){
+            throw new AuthenticationCredentialsNotFoundException("Username non trouvé !");
+        }
+        String password = request.getParameter("password");
+        if(password == null){
+            throw new AuthenticationCredentialsNotFoundException("Password non trouvé !");
+        }
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, password);
+        return authenticationManager.authenticate(token);
     }
 
 

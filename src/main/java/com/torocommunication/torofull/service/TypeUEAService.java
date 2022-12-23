@@ -3,9 +3,12 @@ package com.torocommunication.torofull.service;
 import com.torocommunication.torofull.entities.TypeUEA;
 import com.torocommunication.torofull.repo.TypeUEARepository;
 import com.torocommunication.torofull.service.serviceInterface.TypeUEAInterface;
+import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
-
+@Service
+@Transactional
 public class TypeUEAService implements TypeUEAInterface {
 
     private final TypeUEARepository typeUEARepository;
