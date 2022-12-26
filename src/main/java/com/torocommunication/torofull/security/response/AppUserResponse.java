@@ -1,7 +1,6 @@
 package com.torocommunication.torofull.security.response;
 
-
-import com.torocommunication.torofull.entities.RoleUEA;
+import dev.jtm.library.entities.security.AppRole;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
@@ -18,5 +17,5 @@ public class AppUserResponse {
 
     private Boolean isActive;
 
-    private Collection<RoleUEA> roles;
+    private Collection<AppRole> roles;
 }

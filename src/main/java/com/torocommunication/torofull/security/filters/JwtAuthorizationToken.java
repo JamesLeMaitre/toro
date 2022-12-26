@@ -1,7 +1,6 @@
 package com.torocommunication.torofull.security.filters;
 
-
-import com.torocommunication.torofull.security.utils.JwtUtils;
+import dev.jtm.library.security.utils.JwtUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,9 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-
-import static com.torocommunication.torofull.security.utils.constants.JavaConstant.OPTIONS_HTTP_METHOD;
-import static com.torocommunication.torofull.security.utils.constants.JwtConstant.TOKEN_PREFIX;
+import static dev.jtm.library.security.utils.constants.JavaConstant.OPTIONS_HTTP_METHOD;
+import static dev.jtm.library.security.utils.constants.JwtConstant.TOKEN_PREFIX;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -26,7 +24,7 @@ import static org.springframework.http.HttpStatus.OK;
 @AllArgsConstructor
 public class JwtAuthorizationToken extends OncePerRequestFilter {
 
-    private  JwtUtils jwtUtils;
+    private final JwtUtils jwtUtils;
 
 
     @Override
@@ -47,13 +45,13 @@ public class JwtAuthorizationToken extends OncePerRequestFilter {
                 List<GrantedAuthority> authorities = jwtUtils.getAuthorities(token);
                 Authentication authentication = jwtUtils.getAuthentication(username, authorities, request);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
+
             } else {
                 SecurityContextHolder.clearContext();
                 //SecurityContextHolder.clearContext();
             }
         }
         if(request.isRequestedSessionIdValid()){
-            System.out.println("OK Valide");
             return ;
         }
 

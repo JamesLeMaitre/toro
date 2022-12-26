@@ -1,21 +1,20 @@
 package com.torocommunication.torofull.security.request;
 
-import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-
+import javax.persistence.Column;
 
 @Data
 @RequiredArgsConstructor
 public class ResetPasswordRequest {
 
-    @NotNull
+    @Column(nullable = false)
     private String old_password;
 
-    @NotNull
+    @Column(nullable = false)
     private String new_password;
 
-    @NotNull
+    @Column(nullable = false)
     private String confirm_password;
 }

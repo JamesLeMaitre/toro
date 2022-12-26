@@ -1,8 +1,7 @@
 package com.torocommunication.torofull.security.handler;
 
 import com.auth0.jwt.exceptions.TokenExpiredException;
-
-import com.torocommunication.torofull.security.response.HttpErrorResponse;
+import dev.jtm.library.security.response.HttpErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.web.servlet.error.ErrorController;

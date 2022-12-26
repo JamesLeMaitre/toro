@@ -1,7 +1,6 @@
 package com.torocommunication.torofull.security.response;
 
-
-import com.torocommunication.torofull.security.utils.constants.JwtConstant;
+import dev.jtm.library.security.utils.constants.JwtConstant;
 import lombok.Data;
 
 

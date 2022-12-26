@@ -1,9 +1,8 @@
 package com.torocommunication.torofull.security.config;
 
-import static com.torocommunication.torofull.security.utils.constants.JavaConstant.PUBLIC_URLS;
-import com.torocommunication.torofull.security.filters.JwtAuthenticationEntryPoint;
-import com.torocommunication.torofull.security.filters.JwtAuthorizationToken;
-import com.torocommunication.torofull.security.handler.JwtAccessDeniedHandler;
+import dev.jtm.library.security.filters.JwtAuthenticationEntryPoint;
+import dev.jtm.library.security.filters.JwtAuthorizationToken;
+import dev.jtm.library.security.handler.JwtAccessDeniedHandler;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
+import static dev.jtm.library.security.utils.constants.JavaConstant.PUBLIC_URLS;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @EnableWebSecurity
@@ -43,6 +42,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors()
                 .and()
                 .sessionManagement().sessionCreationPolicy(STATELESS)
+                .and()
+                .authorizeRequests().antMatchers("/refreshToken").permitAll()
                 .and()
                 .authorizeRequests().antMatchers(PUBLIC_URLS).permitAll().anyRequest().authenticated()
                 .and()
