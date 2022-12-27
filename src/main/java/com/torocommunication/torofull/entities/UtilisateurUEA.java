@@ -20,34 +20,34 @@ import java.util.Date;
 public class UtilisateurUEA {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "idUser", nullable = false)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String codeUEA;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String nom;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String prenom;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String photoPiece;
 
     @Temporal(TemporalType.DATE)
-    @Column(nullable = false)
+    @Column(nullable = true)
     private Date dateNaissance;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String genre;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String cv;
 
     @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String adresse;
 
 

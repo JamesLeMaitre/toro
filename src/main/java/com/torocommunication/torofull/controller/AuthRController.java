@@ -1,6 +1,7 @@
 package com.torocommunication.torofull.controller;
 
 
+import com.torocommunication.torofull.security.exceptions.RoleNotFoundException;
 import com.torocommunication.torofull.security.request.LoginRequest;
 import com.torocommunication.torofull.security.request.RegisterRequest;
 import com.torocommunication.torofull.security.response.AppUserResponse;
@@ -15,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.mail.MessagingException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -31,15 +33,9 @@ public class AuthRController extends DataFormatter<AppUserResponse> {
 
 
     @PostMapping("register")
-    public Object register(@RequestBody  RegisterRequest registerRequest){
-        try {
-            return  renderData(true, userService.storeUser(registerRequest),"Create ");
-        } catch (Exception e) {
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            String exceptionAsString = sw.toString();
-            return  renderStringData(false,"Error while processing" ,exceptionAsString);
-        }
+    public Object register(@RequestBody  RegisterRequest registerRequest) throws MessagingException, RoleNotFoundException {
+        return  userService.storeUser(registerRequest);
+
 
     }
 

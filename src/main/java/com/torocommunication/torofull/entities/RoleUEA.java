@@ -20,6 +20,7 @@ public class RoleUEA {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idRole", nullable = false)
     private Long id;
     @Column(nullable = false, unique = true)
     private String rolename;

@@ -2,9 +2,9 @@ package com.torocommunication.torofull.security.utils.constants;
 
 public class EmailConstant {
     public static final String SIMPLE_MAIL_TRANSFER_PROTOCOL = "smtps";
-    public static final String USERNAME = "jamestchao14@gmail.com";
-    public static final String PASSWORD = "mttoalnfpifsjden";
-    public static final String FORM_EMAIL = "jamestchao14@gmail.com";
+    public static final String USERNAME = "maanie mana";
+    public static final String PASSWORD = "lilboska";
+    public static final String FORM_EMAIL = "max07010107@gmail.com";
     public static final String CC_EMAIL = "";
     public static final String EMAIL_SUBJECT = "Get Array, LLC - New Password";
     public static final String GMAIL_SMTP_SERVER = "smtp.gmail.com";
