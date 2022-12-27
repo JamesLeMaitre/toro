@@ -52,10 +52,10 @@ public class EmailServiceImplementation implements EmailService {
         message.addRecipients(CC, InternetAddress.parse(CC_EMAIL, false));
         message.setSentDate(new Date());
         message.setSubject(subject);
-        String link = "http://localhost:8250"+API_BASE_URL+"enabled/"+username+"/account";
+       // String link = "http://localhost:8250"+API_BASE_URL+"enabled/"+username+"/account";
         message.setContent(message, APPLICATION_JSON_VALUE);
        // message.setText(buildEmail(username,link));
-        String msg = "Hello " +username+ "\n" +"http://localhost:8250"+API_BASE_URL+"enabled/"+username+"/account" + "\n\n"+ "Click here to activate your account " ;
+        String msg = "Salut  " +username+ "\n" +"http://localhost:8080"+API_BASE_URL+"enabled/"+username+"/account" + "\n\n"+ "Click here to activate your account " ;
         message.setText(msg);
 
         message.saveChanges();

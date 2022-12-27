@@ -7,7 +7,8 @@ import com.torocommunication.torofull.security.exceptions.RoleNotFoundException;
 import com.torocommunication.torofull.security.request.LoginRequest;
 import com.torocommunication.torofull.security.request.RegisterRequest;
 import com.torocommunication.torofull.security.request.ResetPasswordRequest;
-import com.torocommunication.torofull.security.response.AppUserResponse;
+import com.torocommunication.torofull.security.response.AppUserReponseDem;
+import com.torocommunication.torofull.security.response.AppUserResponseStagiaire;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 
@@ -27,19 +28,22 @@ public interface UtilisateurUEAInterface {
 
     String authenticate(LoginRequest request, AuthenticationManager authenticationManager);
 
-    AppUserResponse authUser(Authentication authentication);
+    AppUserResponseStagiaire authUser(Authentication authentication);
 
-    AppUserResponse storeUser(RegisterRequest registerRequest) throws RoleNotFoundException, MessagingException;
+    AppUserResponseStagiaire storeUser(RegisterRequest registerRequest) throws RoleNotFoundException, MessagingException;
 
-    AppUserResponse updateUser(RegisterRequest request, Authentication authentication);
+
+    AppUserReponseDem storeUserDem(RegisterRequest registerRequest) throws RoleNotFoundException, MessagingException;
+
+    AppUserResponseStagiaire updateUser(RegisterRequest request, Authentication authentication);
 
     void removeUser(String username);
 
-    AppUserResponse resetPassword(ResetPasswordRequest request, String username) throws PasswordNotMatchException, PasswordNotMatchException;
+    AppUserResponseStagiaire resetPassword(ResetPasswordRequest request, String username) throws PasswordNotMatchException, PasswordNotMatchException;
 
-    AppUserResponse disabledAccount(String username);
+    AppUserResponseStagiaire disabledAccount(String username);
 
-    AppUserResponse enabledAccount(String username);
+    AppUserResponseStagiaire enabledAccount(String username);
 
 
 }

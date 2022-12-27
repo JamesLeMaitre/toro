@@ -22,7 +22,9 @@ public class DetailSA {
     private Long id;
     @Column(nullable = false, unique = true)
     private String libelle;
-
+    @ManyToOne
+    @JoinColumn(name = "id_secteurDactivite")
+    private SecteurDactivite secteurDactivite;
     @CreationTimestamp
     @Column(nullable = false)
     private Date dateCreate;

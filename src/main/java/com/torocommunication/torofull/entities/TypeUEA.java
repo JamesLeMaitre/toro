@@ -23,8 +23,8 @@ public class TypeUEA {
     @Column(nullable = false, unique = true)
     private String libelle;
 
-    @Column(nullable = false, unique = true)
-    private Boolean etat=false;
+    @Column(nullable = false)
+    private Boolean etat;
 
     @CreationTimestamp
     @Column(nullable = false)

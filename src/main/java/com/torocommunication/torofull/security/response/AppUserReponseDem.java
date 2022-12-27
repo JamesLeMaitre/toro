@@ -1,18 +1,27 @@
 package com.torocommunication.torofull.security.response;
 
-
 import com.torocommunication.torofull.entities.RoleUEA;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 import java.util.Collection;
+import java.util.Date;
 
-@Data
-@RequiredArgsConstructor
-public class AppUserResponse {
+public class AppUserReponseDem {
+
+
     private String username;
 
     private String email;
+
+    private String password;
+
+
+    private String adresse;
+
+    private Date dateNaissance;
+
+
+    private String genre;
+    private String tel;
 
     private Boolean isNotLocked;
 

@@ -24,9 +24,7 @@ public class SecteurDactivite {
     @Column(nullable = false, unique = true)
     private String libelle;
 
-    @ManyToOne
-    @JoinColumn(name = "id_type_operateur")
-    private SecteurDactivite secteurDactivite;
+
 
     @CreationTimestamp
     @Column(nullable = false)
