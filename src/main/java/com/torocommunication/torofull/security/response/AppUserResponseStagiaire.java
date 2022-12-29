@@ -18,13 +18,13 @@ public class AppUserResponseStagiaire {
 
 
 
+    private String nom;
+
+
+    private String prenom;
     private String username;
 
     private String email;
-
-
-
-
     private String adresse;
 
     private String dateNaissance;

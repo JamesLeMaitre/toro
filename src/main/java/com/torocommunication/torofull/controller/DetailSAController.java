@@ -13,6 +13,7 @@ import static com.torocommunication.torofull.constants.MessageController.*;
 
 @RestController
 @RequestMapping("api/detailsa/")
+@CrossOrigin("*")
 public class DetailSAController extends DataFormatter<DetailSA> {
 
     private final DetailSAInterface detailSAInterface;

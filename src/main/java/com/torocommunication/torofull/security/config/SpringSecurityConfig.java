@@ -44,8 +44,11 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .sessionManagement().sessionCreationPolicy(STATELESS)
                 .and()
+                .authorizeRequests().antMatchers("/api/detailsa/list").permitAll()
+                .and()
                 .authorizeRequests().antMatchers(PUBLIC_URLS).permitAll().anyRequest().authenticated()
                 .and()
+
                 .exceptionHandling().accessDeniedHandler(jwtAccessDeniedHandler).authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                 .addFilterBefore(jwtAuthorizationToken, UsernamePasswordAuthenticationFilter.class)

@@ -19,7 +19,11 @@ import java.util.Date;
 public class RegisterRequest {
 
 
+    @NotNull
+    private String nom;
 
+    @NotNull
+    private String prenom;
     @NotNull
     private String username;
 
