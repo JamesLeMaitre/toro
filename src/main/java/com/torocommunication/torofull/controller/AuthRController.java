@@ -33,11 +33,21 @@ public class AuthRController extends DataFormatter<AppUserResponseStagiaire> {
 
     @PostMapping("register")
     public Object register( @RequestBody  RegisterRequest registerRequest) throws MessagingException, RoleNotFoundException {
-        if (registerRequest.getTypeUEA() == 1  ){
-            return  userService.storeUser(registerRequest);
-        }
 
-        return  null;
+        try {
+            if (registerRequest.getTypeUEA() == 1  ){
+                return  renderData(true,userService.storeUser(registerRequest),"Operation successfully ");
+            }else {
+                return null;
+            }
+
+
+        } catch (Exception e) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            return  renderStringData(false,"Error while processing" ,exceptionAsString);
+        }
 
 
     }
