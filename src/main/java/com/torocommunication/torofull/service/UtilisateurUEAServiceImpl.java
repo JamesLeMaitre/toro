@@ -1,6 +1,8 @@
 package com.torocommunication.torofull.service;
 
+import com.torocommunication.torofull.entities.DetailSA;
 import com.torocommunication.torofull.entities.RoleUEA;
+import com.torocommunication.torofull.entities.TypeUEA;
 import com.torocommunication.torofull.entities.UtilisateurUEA;
 import com.torocommunication.torofull.repo.RoleUEARepo;
 import com.torocommunication.torofull.repo.UtilisateurUEARepo;
@@ -8,10 +10,13 @@ import com.torocommunication.torofull.security.exceptions.PasswordNotMatchExcept
 import com.torocommunication.torofull.security.exceptions.RoleNotFoundException;
 import com.torocommunication.torofull.security.request.RegisterRequest;
 import com.torocommunication.torofull.security.request.ResetPasswordRequest;
-import com.torocommunication.torofull.security.response.AppUserResponse;
+import com.torocommunication.torofull.security.response.AppUserReponseDem;
+import com.torocommunication.torofull.security.response.AppUserResponseStagiaire;
 import com.torocommunication.torofull.security.utils.JwtUtils;
 import com.torocommunication.torofull.security.utils.UserPrincipal;
+import com.torocommunication.torofull.service.serviceInterface.DetailSAInterface;
 import com.torocommunication.torofull.service.serviceInterface.EmailService;
+import com.torocommunication.torofull.service.serviceInterface.TypeUEAInterface;
 import com.torocommunication.torofull.service.serviceInterface.UtilisateurUEAInterface;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -41,6 +46,11 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     private final UtilisateurUEARepo userRepo;
     private final RoleUEARepo roleRepo;
     private  final PasswordEncoder passwordEncoder;
+
+    private  final DetailSAInterface detailSAInterface;
+
+
+    private  final TypeUEAInterface typeUEAInterface;
 
 
 
@@ -113,8 +123,8 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     }
 
     @Override
-    public AppUserResponse authUser(Authentication authentication) {
-        AppUserResponse response = new AppUserResponse();
+    public AppUserResponseStagiaire authUser(Authentication authentication) {
+        AppUserResponseStagiaire response = new AppUserResponseStagiaire();
         String username = authentication.getName();
         Optional<UtilisateurUEA> user = userRepo.findByUsername(username);
         user.orElseThrow(() -> new UsernameNotFoundException("Utilisateur Non trouvée!"));
@@ -123,11 +133,18 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     }
 
     @Override
-    public AppUserResponse storeUser(RegisterRequest registerRequest) throws RoleNotFoundException, MessagingException {
-        AppUserResponse response = new AppUserResponse();
+    public AppUserResponseStagiaire storeUser(RegisterRequest registerRequest) throws RoleNotFoundException, MessagingException {
+        AppUserResponseStagiaire response = new AppUserResponseStagiaire();
         registerRequest.setPassword(bCryptPasswordEncoder.encode(registerRequest.getPassword()));
         UtilisateurUEA user = new UtilisateurUEA();
+
         BeanUtils.copyProperties(registerRequest, user);
+        DetailSA detailSA=  detailSAInterface.getByIds(registerRequest.getDetailSA().longValue());
+
+        TypeUEA typeUEA=typeUEAInterface.getByIds(registerRequest.getTypeUEA().longValue());
+
+        user.setDetailSA(detailSA);
+        user.setTypeUEA(typeUEA);
 
         UtilisateurUEA newUser = userRepo.save(user);
         addRoleToUser(registerRequest.getRoleName(), newUser.getUsername());
@@ -138,8 +155,13 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     }
 
     @Override
-    public AppUserResponse updateUser(RegisterRequest request, Authentication authentication) {
-        AppUserResponse response = new AppUserResponse();
+    public AppUserReponseDem storeUserDem(RegisterRequest registerRequest) throws RoleNotFoundException, MessagingException {
+        return null;
+    }
+
+    @Override
+    public AppUserResponseStagiaire updateUser(RegisterRequest request, Authentication authentication) {
+        AppUserResponseStagiaire response = new AppUserResponseStagiaire();
 
         Optional<UtilisateurUEA> user = userRepo.findByUsername(authentication.getName());
         user.orElseThrow(() -> new UsernameNotFoundException("Utilisateur n'existe pas"));
@@ -159,8 +181,8 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     }
 
     @Override
-    public AppUserResponse resetPassword(ResetPasswordRequest request, String username) throws PasswordNotMatchException {
-        AppUserResponse response = new AppUserResponse();
+    public AppUserResponseStagiaire resetPassword(ResetPasswordRequest request, String username) throws PasswordNotMatchException {
+        AppUserResponseStagiaire response = new AppUserResponseStagiaire();
 
         Optional<UtilisateurUEA> user = userRepo.findByUsername(username);
         user.orElseThrow(() -> new UsernameNotFoundException("Utilisateur n'existe pas"));
@@ -179,8 +201,8 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     }
 
     @Override
-    public AppUserResponse disabledAccount(String username) {
-        AppUserResponse response = new AppUserResponse();
+    public AppUserResponseStagiaire disabledAccount(String username) {
+        AppUserResponseStagiaire response = new AppUserResponseStagiaire();
         Optional<UtilisateurUEA> user = userRepo.findByUsername(username);
         user.orElseThrow(() -> new UsernameNotFoundException("Utilisateur n'existe pas"));
 
@@ -191,8 +213,8 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     }
 
     @Override
-    public AppUserResponse enabledAccount(String username) {
-        AppUserResponse response = new AppUserResponse();
+    public AppUserResponseStagiaire enabledAccount(String username) {
+        AppUserResponseStagiaire response = new AppUserResponseStagiaire();
         Optional<UtilisateurUEA> user = userRepo.findByUsername(username);
         user.orElseThrow(() -> new UsernameNotFoundException("Utilisateur n'existe pas"));
 

@@ -1,9 +1,10 @@
 package com.torocommunication.torofull.controller;
 
 
+import com.torocommunication.torofull.security.exceptions.RoleNotFoundException;
 import com.torocommunication.torofull.security.request.LoginRequest;
 import com.torocommunication.torofull.security.request.RegisterRequest;
-import com.torocommunication.torofull.security.response.AppUserResponse;
+import com.torocommunication.torofull.security.response.AppUserResponseStagiaire;
 import com.torocommunication.torofull.security.response.JwtResponse;
 import com.torocommunication.torofull.service.serviceInterface.UtilisateurUEAInterface;
 import com.torocommunication.torofull.utiles.DataFormatter;
@@ -15,31 +16,39 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
+import javax.mail.MessagingException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-
-import static com.torocommunication.torofull.security.utils.constants.JavaConstant.API_BASE_URL;
 
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(API_BASE_URL)
-public class AuthRController extends DataFormatter<AppUserResponse> {
+@RequestMapping("/api/auth/")
+@CrossOrigin("*")
+public class AuthRController extends DataFormatter<AppUserResponseStagiaire> {
     private final UtilisateurUEAInterface userService;
     private final AuthenticationManager authenticationManager;
 
 
 
     @PostMapping("register")
-    public Object register(@RequestBody  RegisterRequest registerRequest){
+    public Object register( @RequestBody  RegisterRequest registerRequest) throws MessagingException, RoleNotFoundException {
+
         try {
-            return  renderData(true, userService.storeUser(registerRequest),"Create ");
+            if (registerRequest.getTypeUEA() == 1  ){
+                return  renderData(true,userService.storeUser(registerRequest),"Operation successfully ");
+            }else {
+                return null;
+            }
+
+
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
             String exceptionAsString = sw.toString();
             return  renderStringData(false,"Error while processing" ,exceptionAsString);
         }
+
 
     }
 
@@ -62,10 +71,10 @@ public class AuthRController extends DataFormatter<AppUserResponse> {
 
 
     @PostMapping("me")
-    public Object remember(@RequestBody() AppUserResponse me){
+    public Object remember(@RequestBody() AppUserResponseStagiaire me){
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            AppUserResponse response = userService.authUser(authentication);
+            AppUserResponseStagiaire response = userService.authUser(authentication);
 
             return  renderData(true,response,"Create ");
         } catch (Exception e) {
@@ -83,7 +92,7 @@ public class AuthRController extends DataFormatter<AppUserResponse> {
     public Object update( @RequestBody RegisterRequest request) {
         try {
             Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            AppUserResponse response = userService.updateUser(request, authentication);
+            AppUserResponseStagiaire response = userService.updateUser(request, authentication);
             if( authentication.getName() ==null){
                 return  renderStringData(false,"No User" ,"item not found");
             }
@@ -121,7 +130,7 @@ public class AuthRController extends DataFormatter<AppUserResponse> {
     @PutMapping("reset/{username}/password")
     public Object updatePassword(@RequestBody ResetPasswordRequest request, @PathVariable String username){
         try {
-            AppUserResponse response = userService.resetPassword(request, username);
+            AppUserResponseStagiaire response = userService.resetPassword(request, username);
             return  renderData(true,response,"Operation successfully ");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
@@ -136,7 +145,7 @@ public class AuthRController extends DataFormatter<AppUserResponse> {
     @GetMapping("disabled/{username}/account")
     public Object disabled(@PathVariable String username){
         try {
-            AppUserResponse response = userService.disabledAccount(username);
+            AppUserResponseStagiaire response = userService.disabledAccount(username);
             return  renderData(true,response,"Operation successfully ");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
@@ -151,7 +160,7 @@ public class AuthRController extends DataFormatter<AppUserResponse> {
     @GetMapping("enabled/{username}/account")
     public Object getResponse(@PathVariable String username){
         try {
-            AppUserResponse response = userService.enabledAccount(username);
+            AppUserResponseStagiaire response = userService.enabledAccount(username);
             return  renderData(true,response,"Operation successfully ");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
