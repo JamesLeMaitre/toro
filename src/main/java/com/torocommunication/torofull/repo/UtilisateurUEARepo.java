@@ -18,5 +18,15 @@ public interface UtilisateurUEARepo extends JpaRepository<UtilisateurUEA,Long> {
     Optional<UtilisateurUEA> findByUsername(@Param("x") String username);
 
 
+    @Query("select u from UtilisateurUEA u where u.username=:x and u.password=:y ")
+    UtilisateurUEA findByUsernameAndPassword(@Param("x") String username,@Param("y") String password);
+
+
+    @Query("select count(a) from UtilisateurUEA a")
+    int countBy();
+
+    @Query("select count(a) from UtilisateurUEA a  inner join a.roles  roleUEA where roleUEA.rolename=trim(lower('ROLE_ADMIN')) ")
+    int countByAdmin();
+
 
 }

@@ -13,6 +13,7 @@ import static com.torocommunication.torofull.constants.MessageController.*;
 
 @RestController
 @RequestMapping("api/typeuea/")
+@CrossOrigin("*")
 public class TypeUEAController extends DataFormatter<TypeUEA> {
 
     private final TypeUEAInterface typeUEAInterface;
