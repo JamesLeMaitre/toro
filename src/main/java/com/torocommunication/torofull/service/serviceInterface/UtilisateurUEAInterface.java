@@ -22,7 +22,7 @@ public interface UtilisateurUEAInterface {
     UtilisateurUEA getByID(Long id);
     RoleUEA saveRole(RoleUEA role);
     void addRoleToUser(String username,String roleName) throws RoleNotFoundException;
-    UtilisateurUEA getByUsername(String username);
+    UtilisateurUEA getUser(String username);
     List<UtilisateurUEA> getUsers();
 
 
@@ -44,9 +44,6 @@ public interface UtilisateurUEAInterface {
     AppUserResponseStagiaire disabledAccount(String username);
 
     AppUserResponseStagiaire enabledAccount(String username);
-
-
-    UtilisateurUEA findByUsernameAndPassword (String username,String password);
 
 
 }

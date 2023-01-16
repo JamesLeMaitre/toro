@@ -1,7 +1,6 @@
 package com.torocommunication.torofull.security.utils;
 
-
-import com.torocommunication.torofull.entities.UtilisateurUEA;
+import com.torocommunication.torofull.entities.security.AppUsers;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +10,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class UserPrincipal implements UserDetails {
-    private final UtilisateurUEA user;
+    private final AppUsers user;
 
-    public UserPrincipal(UtilisateurUEA user) {
+    public UserPrincipal(AppUsers user) {
         this.user = user;
     }
 
@@ -21,7 +20,7 @@ public class UserPrincipal implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
         user.getRoles().forEach(role -> {
-            GrantedAuthority authority = new SimpleGrantedAuthority(role.getRolename());
+            GrantedAuthority authority = new SimpleGrantedAuthority(role.getRoleName());
             authorities.add(authority);
         });
         return authorities;

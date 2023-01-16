@@ -4,8 +4,6 @@ import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
-
-
 @RequiredArgsConstructor
 @Data
 public class LoginRequest {

@@ -1,8 +1,7 @@
 package com.torocommunication.torofull.security.filters;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.torocommunication.torofull.security.response.HttpErrorResponse;
+import dev.jtm.library.security.response.HttpErrorResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.Http403ForbiddenEntryPoint;
 import org.springframework.stereotype.Component;
@@ -12,8 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 
-
-import static com.torocommunication.torofull.security.utils.constants.JavaConstant.FORBIDDEN_MESSAGE;
+import static dev.jtm.library.security.utils.constants.JavaConstant.FORBIDDEN_MESSAGE;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 

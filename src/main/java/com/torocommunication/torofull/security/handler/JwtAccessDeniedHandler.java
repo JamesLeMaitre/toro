@@ -1,8 +1,7 @@
 package com.torocommunication.torofull.security.handler;
 
-
-import com.torocommunication.torofull.security.filters.JwtAuthenticationEntryPoint;
-import com.torocommunication.torofull.security.response.HttpErrorResponse;
+import dev.jtm.library.security.filters.JwtAuthenticationEntryPoint;
+import dev.jtm.library.security.response.HttpErrorResponse;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -12,8 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-
-import static com.torocommunication.torofull.security.utils.constants.JavaConstant.ACCESS_DENIED_MESSAGE;
+import static dev.jtm.library.security.utils.constants.JavaConstant.ACCESS_DENIED_MESSAGE;
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 
 @Component

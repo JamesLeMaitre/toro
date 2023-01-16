@@ -1,13 +1,11 @@
 package com.torocommunication.torofull.controller;
 
 
-import com.torocommunication.torofull.entities.UtilisateurUEA;
 import com.torocommunication.torofull.security.exceptions.RoleNotFoundException;
 import com.torocommunication.torofull.security.request.LoginRequest;
 import com.torocommunication.torofull.security.request.RegisterRequest;
 import com.torocommunication.torofull.security.response.AppUserResponseStagiaire;
 import com.torocommunication.torofull.security.response.JwtResponse;
-import com.torocommunication.torofull.security.response.UEAreponse;
 import com.torocommunication.torofull.service.serviceInterface.UtilisateurUEAInterface;
 import com.torocommunication.torofull.utiles.DataFormatter;
 import  com.torocommunication.torofull.security.request.ResetPasswordRequest;
@@ -61,15 +59,7 @@ public class AuthRController extends DataFormatter<AppUserResponseStagiaire> {
             JwtResponse response = new JwtResponse();
             response.setAccess_token(token);
             String s = response.getAccess_token();
-            AppUserResponseStagiaire ueAreponse=new AppUserResponseStagiaire();
-
-            UtilisateurUEA uea=userService.getByUsername(loginRequest.getUsername());
-            ueAreponse.setToken(s);
-            ueAreponse.setData(uea);
-
-
-
-            return  renderData(true, ueAreponse,"Create ");
+            return  renderStringData(true,s,"Create ");
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));
