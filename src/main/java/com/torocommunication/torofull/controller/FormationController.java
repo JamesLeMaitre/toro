@@ -14,7 +14,6 @@ import static com.torocommunication.torofull.constants.MessageController.*;
 
 @RestController
 @RequestMapping("api/formation/")
-@CrossOrigin("*")
 public class FormationController extends DataFormatter<Formation> {
 
     private final FormationInterface formationInterface;
