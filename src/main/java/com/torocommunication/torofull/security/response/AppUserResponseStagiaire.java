@@ -26,7 +26,6 @@ public class AppUserResponseStagiaire {
 
     private String email;
     private String adresse;
-    private String token;
 
     private String dateNaissance;
 
@@ -46,8 +45,6 @@ public class AppUserResponseStagiaire {
 
     private DetailSA detailSA;
 
-
-    private Object data;
 
 
 

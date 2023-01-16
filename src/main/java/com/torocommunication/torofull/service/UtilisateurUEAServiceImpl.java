@@ -83,7 +83,7 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
 
 
     @Override
-    public UtilisateurUEA getByUsername(String username) {
+    public UtilisateurUEA getUser(String username) {
         System.out.println("recherche de  l'utilisateur {} "+username);
         return userRepo.findByUsername(username).get();
     }
@@ -222,14 +222,6 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
         UtilisateurUEA userPassword = userRepo.save(user.get());
         BeanUtils.copyProperties(userPassword, response);
         return response;
-    }
-
-    @Override
-    public UtilisateurUEA findByUsernameAndPassword(String username, String password) {
-
-        UtilisateurUEA uea=userRepo.findByUsernameAndPassword(username,bCryptPasswordEncoder.encode(password));
-        return uea;
-
     }
 
     @Override
