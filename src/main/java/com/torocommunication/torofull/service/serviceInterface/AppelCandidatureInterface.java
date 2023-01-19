@@ -20,4 +20,6 @@ public interface AppelCandidatureInterface {
 
     int count();
     List<AppelCandidature> findByIdUea(Long id);
+
+   List<AppelCandidature>  listAppelCandidatureByTypeOffre() ;
 }

@@ -83,7 +83,7 @@ public class AppelCandidatureController  extends DataFormatter<AppelCandidature>
 
 
 
-    @DeleteMapping("disable/{id}")
+    @GetMapping("disable/{id}")
     public Object disable(@PathVariable("id") Long id){
         try {
             appelCandidatureInterface.disable(id);
@@ -98,7 +98,7 @@ public class AppelCandidatureController  extends DataFormatter<AppelCandidature>
         }
     }
 
-    @DeleteMapping("enable/{id}")
+    @GetMapping("enable/{id}")
     public Object delete(@PathVariable("id") Long id){
         try {
             appelCandidatureInterface.enable(id);
@@ -118,6 +118,33 @@ public class AppelCandidatureController  extends DataFormatter<AppelCandidature>
     public Object ByIdUEA(@PathVariable("id") Long id){
         try {
             List<AppelCandidature> items = appelCandidatureInterface.findByIdUea(id);
+            return  renderDataArray(true,items,"("+") "+LIST_OF_ELEMENT);
+        } catch (Exception e) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            return  renderStringData(false,ERROR_PROCESSING_MESSAGE ,exceptionAsString);
+        }
+    }
+
+
+    @GetMapping("getBYid/{id}")
+    public Object getById(@PathVariable("id") Long id){
+        try {
+            AppelCandidature items = appelCandidatureInterface.getById(id);
+            return  renderData(true,items,"("+") "+LIST_OF_ELEMENT);
+        } catch (Exception e) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            return  renderStringData(false,ERROR_PROCESSING_MESSAGE ,exceptionAsString);
+        }
+    }
+
+    @GetMapping("typeOffre")
+    public Object getByTypeOofre(){
+        try {
+            List<AppelCandidature> items = appelCandidatureInterface.listAppelCandidatureByTypeOffre();
             return  renderDataArray(true,items,"("+") "+LIST_OF_ELEMENT);
         } catch (Exception e) {
             StringWriter sw = new StringWriter();

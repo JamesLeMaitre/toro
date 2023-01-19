@@ -87,4 +87,9 @@ public class AppelCandidatureServiceImpl implements AppelCandidatureInterface, S
     public List<AppelCandidature> findByIdUea(Long id) {
         return appelCandidatureRepo.listAppelCandidatureByIdUea(id);
     }
+
+    @Override
+    public List<AppelCandidature> listAppelCandidatureByTypeOffre() {
+        return appelCandidatureRepo.listAppelCandidatureByTypeOffre();
+    }
 }

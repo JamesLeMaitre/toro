@@ -32,6 +32,9 @@ public class AppelCandidature {
     @Column(nullable = false)
     private String adresse ;
 
+    @Column(nullable = false)
+    private String typeOffre ;
+
     @Column
     private Boolean etat=true;
 
@@ -51,6 +54,9 @@ public class AppelCandidature {
     @ManyToOne
     @JoinColumn(name = "id_detailSA")
     private DetailSA detailSA;
+
+
+
 
 
 }

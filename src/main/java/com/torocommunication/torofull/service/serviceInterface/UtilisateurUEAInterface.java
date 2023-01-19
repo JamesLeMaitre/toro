@@ -1,5 +1,6 @@
 package com.torocommunication.torofull.service.serviceInterface;
 
+
 import com.torocommunication.torofull.entities.RoleUEA;
 import com.torocommunication.torofull.entities.UtilisateurUEA;
 import com.torocommunication.torofull.security.exceptions.PasswordNotMatchException;
@@ -54,6 +55,9 @@ public interface UtilisateurUEAInterface {
     int countAdmin();
 
     UtilisateurUEA getById (Long id);
+
+
+
 
 
 }

@@ -15,4 +15,8 @@ public interface AppelCandidatureRepo extends JpaRepository<AppelCandidature,Lon
 
     @Query("select a from AppelCandidature a where a.uea.id=:x  ")
     public List<AppelCandidature> listAppelCandidatureByIdUea(@Param("x") Long id);
+
+
+    @Query("select a from AppelCandidature a where a.typeOffre=trim(lower('stage'))  ")
+    public List<AppelCandidature> listAppelCandidatureByTypeOffre();
 }
