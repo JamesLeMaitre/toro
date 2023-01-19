@@ -6,10 +6,7 @@ import com.torocommunication.torofull.entities.UtilisateurUEA;
 import com.torocommunication.torofull.service.serviceInterface.UtilisateurUEAInterface;
 import com.torocommunication.torofull.utiles.DataFormatter;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -62,6 +59,19 @@ public class UEAController extends DataFormatter<UtilisateurUEA> {
             int items = utilisateurUEAInterface.countAdmin();
             return  items;
 
+        } catch (Exception e) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            return  renderStringData(false,ERROR_PROCESSING_MESSAGE ,exceptionAsString);
+        }
+    }
+
+    @GetMapping("getById/{id}")
+    public Object getById(@PathVariable("id") Long id){
+        try {
+            UtilisateurUEA items = utilisateurUEAInterface.getById(id);
+            return  renderData(true,items,"("+utilisateurUEAInterface.count()+") "+LIST_OF_ELEMENT);
         } catch (Exception e) {
             StringWriter sw = new StringWriter();
             e.printStackTrace(new PrintWriter(sw));

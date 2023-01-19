@@ -143,6 +143,11 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
 
         TypeUEA typeUEA=typeUEAInterface.getByIds(registerRequest.getTypeUEA().longValue());
 
+
+        System.out.println("detail " +detailSA);
+
+        System.out.println("type" +registerRequest.getTypeUEA() );
+
         user.setDetailSA(detailSA);
         user.setTypeUEA(typeUEA);
 
@@ -241,6 +246,11 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     @Override
     public int countAdmin() {
         return userRepo.countByAdmin();
+    }
+
+    @Override
+    public UtilisateurUEA getById(Long id) {
+        return userRepo.findById(id).orElse(null);
     }
 
     @Override

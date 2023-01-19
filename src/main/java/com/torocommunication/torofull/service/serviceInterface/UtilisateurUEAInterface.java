@@ -53,5 +53,7 @@ public interface UtilisateurUEAInterface {
 
     int countAdmin();
 
+    UtilisateurUEA getById (Long id);
+
 
 }
