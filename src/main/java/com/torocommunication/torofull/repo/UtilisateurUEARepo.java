@@ -29,4 +29,9 @@ public interface UtilisateurUEARepo extends JpaRepository<UtilisateurUEA,Long> {
     int countByAdmin();
 
 
+
+    @Query(value = "Select count(a.id) from UtilisateurUEA a WHERE  a.codeUEA like CONCAT(:x, '%')")
+    public Integer  getLastIn(@Param("x") String code);
+
+
 }

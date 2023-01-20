@@ -42,7 +42,6 @@ public class DataFormatter<T> {
     }
 
 
-
     public FormatterDoubleString<String> renderDoubleStringData(boolean status, Double data, String message){
         String total = data+"";
         String [] valuesSplited =  total.split("E");
