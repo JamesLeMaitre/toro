@@ -36,6 +36,7 @@ import  com.torocommunication.torofull.security.request.LoginRequest;
 import javax.mail.MessagingException;
 import javax.transaction.Transactional;
 
+import java.text.DecimalFormat;
 import java.util.List;
 import java.util.Optional;
 
@@ -83,7 +84,7 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
 
 
     @Override
-    public UtilisateurUEA getUser(String username) {
+    public UtilisateurUEA getByUsername(String username) {
         System.out.println("recherche de  l'utilisateur {} "+username);
         return userRepo.findByUsername(username).get();
     }
@@ -142,6 +143,19 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
         DetailSA detailSA=  detailSAInterface.getByIds(registerRequest.getDetailSA().longValue());
 
         TypeUEA typeUEA=typeUEAInterface.getByIds(registerRequest.getTypeUEA().longValue());
+
+
+        System.out.println("detail " +detailSA);
+
+        System.out.println("type" +registerRequest.getTypeUEA() );
+
+
+        String initial = detailSA.getLibelle();
+
+        String result = initial.substring(0,3);
+
+        String cod = GetNextCode(result.toUpperCase());
+        user.setCodeUEA(cod);
 
         user.setDetailSA(detailSA);
         user.setTypeUEA(typeUEA);
@@ -225,6 +239,30 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     }
 
     @Override
+    public UtilisateurUEA findByUsernameAndPassword(String username, String password) {
+
+        UtilisateurUEA uea=userRepo.findByUsernameAndPassword(username,bCryptPasswordEncoder.encode(password));
+        return uea;
+
+    }
+
+    @Override
+    public int count() {
+            return userRepo.countBy();
+
+    }
+
+    @Override
+    public int countAdmin() {
+        return userRepo.countByAdmin();
+    }
+
+    @Override
+    public UtilisateurUEA getById(Long id) {
+        return userRepo.findById(id).orElse(null);
+    }
+
+    @Override
     public RoleUEA saveRole(RoleUEA role) {
         return roleRepo.save(role);
     }
@@ -304,6 +342,25 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
                 "  </tbody></table><div class=\"yj6qo\"></div><div class=\"adL\">\n" +
                 "\n" +
                 "</div></div>";
+    }
+
+
+
+
+    public String GetNextCode(String init) {
+
+        System.out.println("Initial : "+init);
+
+        System.out.println("==============01===================");
+
+        System.out.println("Code Next : "+userRepo.getLastIn(init));
+
+        Integer codeNext = userRepo.getLastIn(init) + 1;
+        System.out.println("maaaaaaaaaa "+codeNext);
+        DecimalFormat formatterC = new DecimalFormat(init+"0000000000");
+        String c=formatterC.format(codeNext);
+
+        return c;
     }
 
 }

@@ -19,4 +19,16 @@ public interface UtilisateurUEARepo extends JpaRepository<UtilisateurUEA,Long> {
 
 
 
+    @Query("select count(a) from UtilisateurUEA a")
+    int countBy();
+
+    @Query("select count(a) from UtilisateurUEA a  inner join a.roles  roleUEA where roleUEA.rolename=trim(lower('ROLE_ADMIN')) ")
+    int countByAdmin();
+
+
+
+    @Query(value = "Select count(a.id) from UtilisateurUEA a WHERE  a.codeUEA like CONCAT(:x, '%')")
+    public Integer  getLastIn(@Param("x") String code);
+
+
 }

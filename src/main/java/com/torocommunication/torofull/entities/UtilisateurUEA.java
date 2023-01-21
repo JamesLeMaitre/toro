@@ -69,6 +69,9 @@ public class UtilisateurUEA {
     @Column
     private Boolean isActive = false;
 
+    @Column
+    private Boolean etat = true;
+
     @CreationTimestamp
     @Column(nullable = false)
     private Date dateCreate;
@@ -77,16 +80,16 @@ public class UtilisateurUEA {
     @Column(nullable = false)
     private Date dateUpdate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_type_UEA")
     private TypeUEA typeUEA;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "id_type_operateur")
     private Abonnement abonnement;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_type_detailSA")
+    @ManyToOne
+    @JoinColumn(name = "detailSA")
     private DetailSA detailSA;
 
 

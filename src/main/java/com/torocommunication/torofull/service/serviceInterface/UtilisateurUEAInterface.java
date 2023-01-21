@@ -1,5 +1,6 @@
 package com.torocommunication.torofull.service.serviceInterface;
 
+
 import com.torocommunication.torofull.entities.RoleUEA;
 import com.torocommunication.torofull.entities.UtilisateurUEA;
 import com.torocommunication.torofull.security.exceptions.PasswordNotMatchException;
@@ -22,7 +23,7 @@ public interface UtilisateurUEAInterface {
     UtilisateurUEA getByID(Long id);
     RoleUEA saveRole(RoleUEA role);
     void addRoleToUser(String username,String roleName) throws RoleNotFoundException;
-    UtilisateurUEA getUser(String username);
+    UtilisateurUEA getByUsername(String username);
     List<UtilisateurUEA> getUsers();
 
 
@@ -44,6 +45,19 @@ public interface UtilisateurUEAInterface {
     AppUserResponseStagiaire disabledAccount(String username);
 
     AppUserResponseStagiaire enabledAccount(String username);
+
+
+    UtilisateurUEA findByUsernameAndPassword (String username,String password);
+
+
+    int count();
+
+    int countAdmin();
+
+    UtilisateurUEA getById (Long id);
+
+
+
 
 
 }

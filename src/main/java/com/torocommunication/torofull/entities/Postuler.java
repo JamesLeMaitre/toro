@@ -10,31 +10,45 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
 @Data
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class DetailSA {
+public class Postuler {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String libelle;
+
+    @Column(nullable = false)
+    private String diplome;
+
+
+    @Column(nullable = false)
+    private String lettreMotivation;
+
+    @Column(nullable = false)
+    private String curriculumVitae;
+
+    @CreationTimestamp()
+    @Column(nullable = false,updatable = false)
+    private Date dateCreation;
+
+    @UpdateTimestamp()
+    @Column(nullable = false)
+    private Date dateUpdate;
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private  AppelCandidature candidature;
 
 
     @ManyToOne
-    @JoinColumn(name = "id_secteurDactivite")
-    private SecteurDactivite secteurDactivite;
+    private UtilisateurUEA uea ;
 
-    @CreationTimestamp
-    @Column(nullable = false)
-    private Date dateCreate;
 
-    @UpdateTimestamp
-    @Column(nullable = false)
-    private Date dateUpdate;
+
 
 }

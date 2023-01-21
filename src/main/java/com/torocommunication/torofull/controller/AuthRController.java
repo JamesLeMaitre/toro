@@ -35,7 +35,7 @@ public class AuthRController extends DataFormatter<AppUserResponseStagiaire> {
     public Object register( @RequestBody  RegisterRequest registerRequest) throws MessagingException, RoleNotFoundException {
 
         try {
-            if (registerRequest.getTypeUEA() == 1  ){
+            if (registerRequest.getTypeUEA() == 1 || registerRequest.getTypeUEA() == 2 ){
                 return  renderData(true,userService.storeUser(registerRequest),"Operation successfully ");
             }else {
                 return null;
