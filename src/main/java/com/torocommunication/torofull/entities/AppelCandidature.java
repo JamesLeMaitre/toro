@@ -8,7 +8,10 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,7 +20,9 @@ import java.util.Date;
 @ToString
 public class AppelCandidature {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_appelCandidature")
     private Long id;
 
     @Column(nullable = false)
@@ -26,7 +31,7 @@ public class AppelCandidature {
     @Column(nullable = false)
     private String resume;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length =65530)
     private String description;
 
     @Column(nullable = false)
@@ -34,6 +39,7 @@ public class AppelCandidature {
 
     @Column(nullable = false)
     private String typeOffre ;
+
 
     @Column
     private Boolean etat=true;
@@ -54,6 +60,14 @@ public class AppelCandidature {
     @ManyToOne
     @JoinColumn(name = "id_detailSA")
     private DetailSA detailSA;
+
+
+    @JoinTable(name = "appelCandidature_jobTypes",
+            joinColumns = @JoinColumn(name = "appelCandidature_id", referencedColumnName = "id_appelCandidature"),
+            inverseJoinColumns = @JoinColumn(name = "jobTypes_id", referencedColumnName = "idJobType"))
+    @ManyToMany
+    @ToString.Exclude
+    private Collection<JobType> jobTypes = new ArrayList<>();
 
 
 

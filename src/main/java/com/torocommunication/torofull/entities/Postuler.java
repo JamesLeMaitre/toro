@@ -42,7 +42,7 @@ public class Postuler {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private  AppelCandidature candidature;
+    private  AppelCandidature appelCandidature;
 
 
     @ManyToOne
