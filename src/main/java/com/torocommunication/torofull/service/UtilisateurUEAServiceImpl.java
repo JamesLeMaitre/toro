@@ -263,6 +263,11 @@ public class UtilisateurUEAServiceImpl implements UtilisateurUEAInterface, UserD
     }
 
     @Override
+    public List<UtilisateurUEA> listUeaByIdTypeUeaAndIdDetailSA(Long idType, Long idSa) {
+        return userRepo.listUeaByIdTypeueaAndIdDetailsa(idType,idSa);
+    }
+
+    @Override
     public RoleUEA saveRole(RoleUEA role) {
         return roleRepo.save(role);
     }

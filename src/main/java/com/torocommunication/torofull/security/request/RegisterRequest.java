@@ -52,4 +52,7 @@ public class RegisterRequest {
     @NotNull
     private Long detailSA;
 
+    @NotNull
+    private String   photoPiece;
+
 }

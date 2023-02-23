@@ -38,6 +38,8 @@ public class AppUserResponseStagiaire {
 
     private Boolean isActive;
 
+    private String   photoPiece;
+
     private Collection<RoleUEA> roles;
 
 

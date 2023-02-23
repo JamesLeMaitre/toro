@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -29,6 +30,11 @@ public interface UtilisateurUEARepo extends JpaRepository<UtilisateurUEA,Long> {
 
     @Query(value = "Select count(a.id) from UtilisateurUEA a WHERE  a.codeUEA like CONCAT(:x, '%')")
     public Integer  getLastIn(@Param("x") String code);
+
+
+
+    @Query(value = "Select u from UtilisateurUEA u WHERE  u.typeUEA.id=:x and  u.detailSA.id=:y")
+    public List<UtilisateurUEA> listUeaByIdTypeueaAndIdDetailsa(@Param("x") Long idType, @Param("y") Long idSA);
 
 
 }

@@ -6,9 +6,13 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.w3c.dom.Text;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -17,7 +21,8 @@ import java.util.Date;
 @ToString
 public class AppelCandidature {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -26,7 +31,7 @@ public class AppelCandidature {
     @Column(nullable = false)
     private String resume;
 
-    @Column(nullable = false)
+    @Column(nullable = false,length = 6523)
     private String description;
 
     @Column(nullable = false)
@@ -34,6 +39,7 @@ public class AppelCandidature {
 
     @Column(nullable = false)
     private String typeOffre ;
+
 
     @Column
     private Boolean etat=true;
@@ -52,8 +58,14 @@ public class AppelCandidature {
     private  UtilisateurUEA uea;
 
     @ManyToOne
-    @JoinColumn(name = "id_detailSA")
+    @JoinColumn
     private DetailSA detailSA;
+
+
+    @JoinTable
+    @ManyToMany
+    @ToString.Exclude
+    private Collection<JobType> jobTypes = new ArrayList<>();
 
 
 
