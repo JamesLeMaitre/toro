@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class ChargementServiceImpl implements ChargementServiceInterface {
@@ -40,9 +42,7 @@ public class ChargementServiceImpl implements ChargementServiceInterface {
         AppelCandidature candidature=candidatureInterface.getById(appel);
         UtilisateurUEA uea=ueaInterface.getById(idUea);
 
-     Chargement exist=   getByIdUeaAndAppel(idUea,appel);
 
-         if (exist!=null)   throw new RuntimeException("Offre déja charger");
 
         Chargement chargement=new Chargement();
 
@@ -54,5 +54,10 @@ public class ChargementServiceImpl implements ChargementServiceInterface {
 
         Chargement  chargement1=chargementRepo.save(chargement);
         return chargement1;
+    }
+
+    @Override
+    public List<Chargement> findByIdUea(Long idUea) {
+        return chargementRepo.findByIdUea(idUea);
     }
 }
