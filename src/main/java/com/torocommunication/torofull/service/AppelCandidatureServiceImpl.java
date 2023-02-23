@@ -2,8 +2,10 @@ package com.torocommunication.torofull.service;
 
 
 import com.torocommunication.torofull.entities.AppelCandidature;
+import com.torocommunication.torofull.entities.DetailSA;
 import com.torocommunication.torofull.entities.JobType;
 import com.torocommunication.torofull.repo.AppelCandidatureRepo;
+import com.torocommunication.torofull.repo.DetailSARepository;
 import com.torocommunication.torofull.repo.TypeJobRepo;
 import com.torocommunication.torofull.service.serviceInterface.AppelCandidatureInterface;
 
@@ -22,10 +24,13 @@ public class AppelCandidatureServiceImpl implements AppelCandidatureInterface, S
 
     private final AppelCandidatureRepo appelCandidatureRepo;
 
+    private final DetailSARepository detailSARepository;
+
     private final TypeJobRepo typeJobRepo;
 
-    public AppelCandidatureServiceImpl(AppelCandidatureRepo appelCandidatureRepo, TypeJobRepo typeJobRepo) {
+    public AppelCandidatureServiceImpl(AppelCandidatureRepo appelCandidatureRepo, DetailSARepository detailSARepository, TypeJobRepo typeJobRepo) {
         this.appelCandidatureRepo = appelCandidatureRepo;
+        this.detailSARepository = detailSARepository;
         this.typeJobRepo = typeJobRepo;
         ;
     }
@@ -39,6 +44,11 @@ public class AppelCandidatureServiceImpl implements AppelCandidatureInterface, S
     @Override
     public AppelCandidature create(AppelCandidature data) {
 
+
+        DetailSA detailSA=detailSARepository.findById(data.getDetailSA().getId()).get();
+
+
+        data.setDetailSA(detailSA);
         AppelCandidature   appelCandidature  =  appelCandidatureRepo.save(data);
 
 

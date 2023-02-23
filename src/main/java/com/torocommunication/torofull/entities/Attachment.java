@@ -1,15 +1,14 @@
 package com.torocommunication.torofull.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 
@@ -20,13 +19,18 @@ import java.util.Date;
 
 
 @Entity
-@Data@NoArgsConstructor
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 public class Attachment {
 
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
+
+
 
     @Column(nullable = false)
     private String fileName;

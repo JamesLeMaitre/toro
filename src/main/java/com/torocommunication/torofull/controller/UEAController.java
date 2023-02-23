@@ -79,4 +79,16 @@ public class UEAController extends DataFormatter<UtilisateurUEA> {
             return  renderStringData(false,ERROR_PROCESSING_MESSAGE ,exceptionAsString);
         }
     }
+    @GetMapping("list/by/{idType}/{idSA}")
+    public Object getById(@PathVariable("idType") Long idType,@PathVariable("idSA") Long idSA){
+        try {
+            List<UtilisateurUEA> items = utilisateurUEAInterface.listUeaByIdTypeUeaAndIdDetailSA(idType,idSA);
+            return  renderDataArray(true,items,"("+utilisateurUEAInterface.count()+") "+LIST_OF_ELEMENT);
+        } catch (Exception e) {
+            StringWriter sw = new StringWriter();
+            e.printStackTrace(new PrintWriter(sw));
+            String exceptionAsString = sw.toString();
+            return  renderStringData(false,ERROR_PROCESSING_MESSAGE ,exceptionAsString);
+        }
+    }
 }

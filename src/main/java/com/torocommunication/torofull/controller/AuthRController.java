@@ -25,7 +25,7 @@ import java.io.StringWriter;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping("/api/auth/")
+@RequestMapping("api/auth/")
 @CrossOrigin("*")
 public class AuthRController extends DataFormatter<AppUserResponseStagiaire> {
     private final UtilisateurUEAInterface userService;
@@ -137,16 +137,14 @@ public class AuthRController extends DataFormatter<AppUserResponseStagiaire> {
     }
 
 
-    @PutMapping("reset/{username}/password")
+    @PutMapping("reset/{username}")
     public Object updatePassword(@RequestBody ResetPasswordRequest request, @PathVariable String username){
         try {
             AppUserResponseStagiaire response = userService.resetPassword(request, username);
             return  renderData(true,response,"Operation successfully ");
         } catch (Exception e) {
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            String exceptionAsString = sw.toString();
-            return  renderStringData(false,"Error while processing" ,exceptionAsString);
+
+            return  renderStringData(false,"Error while processing" ,"verifier les informations entrer");
         }
     }
 

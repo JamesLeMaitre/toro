@@ -56,6 +56,8 @@ public interface UtilisateurUEAInterface {
 
     UtilisateurUEA getById (Long id);
 
+    List<UtilisateurUEA> listUeaByIdTypeUeaAndIdDetailSA(Long idType,Long idSa);
+
 
 
 
