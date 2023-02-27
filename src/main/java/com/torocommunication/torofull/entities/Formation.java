@@ -25,7 +25,7 @@ public class Formation {
     private String libelle;
 
     @ManyToOne
-    @JoinColumn(name = "id_type_operateur")
+    @JoinColumn
     private UtilisateurUEA utilisateurUEA;
 
     @CreationTimestamp

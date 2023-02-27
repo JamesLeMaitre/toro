@@ -60,4 +60,21 @@ public class ChargementServiceImpl implements ChargementServiceInterface {
     public List<Chargement> findByIdUea(Long idUea) {
         return chargementRepo.findByIdUea(idUea);
     }
+
+
+    @Override
+    public Chargement getById(Long id) {
+
+        return chargementRepo.findById(id).orElse(null);
+    }
+
+
+    @Override
+    public void  dissable(Long id) {
+
+        Chargement chargement=getById(id);
+        chargement.setEtat(false);
+
+        chargementRepo.save(chargement);
+    }
 }

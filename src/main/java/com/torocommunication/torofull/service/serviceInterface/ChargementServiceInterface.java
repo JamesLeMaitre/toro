@@ -14,4 +14,8 @@ public interface ChargementServiceInterface {
 
 
     List<Chargement> findByIdUea (Long idUea);
+
+    Chargement getById(Long id);
+
+    void  dissable(Long id);
 }

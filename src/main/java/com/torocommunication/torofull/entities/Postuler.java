@@ -22,7 +22,7 @@ public class Postuler {
     private Long id;
 
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String diplome;
 
 
@@ -42,10 +42,12 @@ public class Postuler {
 
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn
     private  AppelCandidature appelCandidature;
 
 
     @ManyToOne
+    @JoinColumn
     private UtilisateurUEA uea ;
 
 
